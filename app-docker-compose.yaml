@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  node-app:
+    image: my-server-app
+    ports:
+      - "8081:8081"  # Expose port 8081 for the backend
+    container_name: node-app-container
+    # volumes:
+    #   - .:/app # Uncomment if you want to bind mount your local code into the container
+
+  react-app:
+    image: my-client-app
+    ports:
+      - "3000:3000"  # Expose port 3000 for the React frontend
+    container_name: react-app-container
+    depends_on:
+      - node-app
+    # If your React app needs to communicate with the backend, use the service name
+    # for the backend URL in your React app's configuration, e.g., http://node-app:8081
+
